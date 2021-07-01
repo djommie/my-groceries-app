@@ -6,7 +6,7 @@ function List(props) {
     return (
         <div>
             <ul>
-                <button onClick={props.handleCLick}>hoi</button>
+                <button onClick={props.handleCLick}>Test</button>
                 {groceryList}
             </ul>
         </div>

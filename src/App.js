@@ -18,7 +18,9 @@ class App extends Component {
         { id: 9, title: "Meer Pils" }
       ],
       shoppingListItems: [
-        { id: 10, title: "Broccoli" }
+        { id: 10, title: "Broccoli" },
+        { id: 11, title: "Kwark" },
+        { id: 12, title: "Chips" }
       ]
     }
     this.handleClickGroceryItem = this.handleClickGroceryItem.bind(this)

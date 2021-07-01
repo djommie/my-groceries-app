@@ -4,7 +4,7 @@ import List from "./List"
 function ShoppingCart(props) {
     return (
         <div>
-            <button onClick={props.handleCLick}>hoi</button>
+            <button onClick={props.handleCLick}>Test</button>
             <List groceryItems={props.ShoppingItems} handleCLick={props.handleCLick} />
         </div>
     )
