@@ -46,8 +46,8 @@ class App extends Component {
     })
   }
 
-  addGrocery() {
-    alert("doorgegeven")
+  addGrocery(event) {
+    alert(event.target.value)
     // this.setState(prevState => {
     //   const updatedGroceryList = prevState.groceryList += { id: 99, title: input }
     //   return {
@@ -60,6 +60,12 @@ class App extends Component {
   render() {
     return (
       <div className="container">
+        <form onSubmit={this.addGrocery}>
+          <input
+            name="input-groceries"
+            placeholder="Test addGrocery"
+          />
+        </form>
         <GroceryList
           groceryItems={this.state.groceryItems}
           handleClick={this.handleClickGroceryItem}
