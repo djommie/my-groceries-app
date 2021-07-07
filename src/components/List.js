@@ -2,11 +2,19 @@ import React from "react"
 import ListItem from "./ListItem"
 
 function List(props) {
-    const groceryList = props.groceryItems.map(item => <ListItem id={item.id} item={item} handleClick={props.handleClick} />)
+    const groceryList = props.groceryItems.map((item, index) => {
+        return (
+            <ListItem
+                key={index}
+                id={item.id}
+                item={item}
+                handleClick={props.handleClick}
+            />
+        )
+    })
     return (
         <div>
-            <ul>
-                <button onClick={props.handleCLick}>Test</button>
+            <ul className={props.className}>
                 {groceryList}
             </ul>
         </div>

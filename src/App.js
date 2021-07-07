@@ -24,23 +24,53 @@ class App extends Component {
       ]
     }
     this.handleClickGroceryItem = this.handleClickGroceryItem.bind(this)
+    this.emptyCart = this.emptyCart.bind(this)
+    this.addGrocery = this.addGrocery.bind(this)
   }
 
-  handleClickGroceryItem() {
-    alert('handleClickGroceryItem')
+  handleClickGroceryItem(id) {
+    this.setState(prevState => {
+      const newShoppingItem = prevState.groceryItems.filter(item => item.id === id)
+      const updatedShoppingList = prevState.shoppingListItems.concat(newShoppingItem)
+      const updatedGroceryItems = prevState.groceryItems.filter(item => item.id !== id)
+      return {
+        groceryItems: updatedGroceryItems,
+        shoppingListItems: updatedShoppingList
+      }
+    })
+  }
+
+  emptyCart() {
+    this.setState({
+      shoppingListItems: []
+    })
+  }
+
+  addGrocery() {
+    alert("doorgegeven")
+    // this.setState(prevState => {
+    //   const updatedGroceryList = prevState.groceryList += { id: 99, title: input }
+    //   return {
+    //     groceryList: updatedGroceryList
+    //   }
+    // }
+    // )
   }
 
   render() {
     return (
-      <div>
+      <div className="container">
         <GroceryList
           groceryItems={this.state.groceryItems}
           handleClick={this.handleClickGroceryItem}
+          addGrocery={this.addGrocery}
         />
         <ShoppingCart
           ShoppingItems={this.state.shoppingListItems}
+          handleClick={this.handleClickGroceryItem}
+          emptyCart={this.emptyCart}
         />
-      </div>
+      </div >
     );
   }
 }

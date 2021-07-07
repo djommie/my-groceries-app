@@ -5,9 +5,41 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #cfc6c6;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 15px;
+}
+
+h3 {
+  margin-left: 40px;
+}
+
+ul {
+  list-style-type: none;
+  width: 300px;
+}
+
+.grocery-list li:nth-child(2n) {
+  background-color:darkgoldenrod;
+}
+
+.cart-list li:nth-child(2n) {
+  background-color:darkolivegreen;
+}
+
+.list-item {
+  border-style: solid;
+  border-width: 1px 2px 1px 2px;
+  padding-left: 10px;
+  height: 35px;
+  padding-top: 10px;
 }
