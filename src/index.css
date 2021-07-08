@@ -13,19 +13,26 @@ code {
     monospace;
 }
 
+/* Minimale tijd besteed aan styling, wilde graag door */
+
 .container {
   display: flex;
   flex-flow: row wrap;
   margin: 15px;
 }
 
+.list-container {
+  text-align: center;
+}
+
 h3 {
-  margin-left: 40px;
+  font-weight:800;
 }
 
 ul {
   list-style-type: none;
-  width: 300px;
+  width: 450px;
+  text-align: left;
 }
 
 .grocery-list li:nth-child(2n) {

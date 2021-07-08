@@ -9,6 +9,7 @@ function List(props) {
                 id={item.id}
                 item={item}
                 handleClick={props.handleClick}
+                isShoppingCart={props.isShoppingCart}
             />
         )
     })

@@ -7,20 +7,21 @@ class App extends Component {
     super()
     this.state = {
       groceryItems: [
-        { id: 1, title: "Melk" },
-        { id: 2, title: "Kaas" },
-        { id: 3, title: "Koffie" },
-        { id: 4, title: "Eieren" },
-        { id: 5, title: "Pils" },
-        { id: 6, title: "Tomaten" },
-        { id: 7, title: "Appels" },
-        { id: 8, title: "Gehakt" },
-        { id: 9, title: "Meer Pils" }
+        { id: 1, amount: 0, title: "Melk" },
+        { id: 2, amount: 0, title: "Kaas" },
+        { id: 3, amount: 0, title: "Koffie" },
+        { id: 4, amount: 0, title: "Eieren" },
+        { id: 5, amount: 0, title: "Pils" },
+        { id: 6, amount: 0, title: "Tomaten" },
+        { id: 7, amount: 0, title: "Appels" },
+        { id: 8, amount: 0, title: "Gehakt" },
+        { id: 9, amount: 0, title: "Meer Pils" },
+        { id: 10, amount: 1, title: "Broccoli" },
+        { id: 11, amount: 1, title: "Kwark" },
+        { id: 12, amount: 1, title: "Chips" }
       ],
       shoppingListItems: [
-        { id: 10, title: "Broccoli" },
-        { id: 11, title: "Kwark" },
-        { id: 12, title: "Chips" }
+
       ]
     }
     this.handleClickGroceryItem = this.handleClickGroceryItem.bind(this)
@@ -30,15 +31,36 @@ class App extends Component {
 
   handleClickGroceryItem(id) {
     this.setState(prevState => {
-      const newShoppingItem = prevState.groceryItems.filter(item => item.id === id)
-      const updatedShoppingList = prevState.shoppingListItems.concat(newShoppingItem)
-      const updatedGroceryItems = prevState.groceryItems.filter(item => item.id !== id)
-      return {
-        groceryItems: updatedGroceryItems,
-        shoppingListItems: updatedShoppingList
+      const prev = prevState.shoppingListItems.map(item => item.id)
+      if (prev.includes(id)) {
+        const updatedShoppingList = prevState.shoppingListItems.map(item => {
+          if (item.id === id) {
+            // Was eerst += 1, maar op die manier kwam er steeds 2 bij per click, voor de grap op 0.5 gezet en dat werkt perfect, niet ideaal.
+            item.amount += 0.5
+            return item
+          } else {
+            return item
+          }
+        })
+        return {
+          shoppingListItems: updatedShoppingList
+        }
+      }
+      else {
+        let newShoppingItem = prevState.groceryItems.filter(item => item.id === id)
+        newShoppingItem[0].amount = 1
+        const updatedShoppingList = prevState.shoppingListItems.concat(newShoppingItem)
+        return {
+          shoppingListItems: updatedShoppingList
+        }
       }
     })
   }
+
+
+
+
+
 
   emptyCart() {
     this.setState({
@@ -47,25 +69,19 @@ class App extends Component {
   }
 
   addGrocery(event) {
-    alert(event.target.value)
-    // this.setState(prevState => {
-    //   const updatedGroceryList = prevState.groceryList += { id: 99, title: input }
-    //   return {
-    //     groceryList: updatedGroceryList
-    //   }
-    // }
-    // )
+    event.preventDefault()
+    const input = document.getElementById('input-groceries').value
+    this.setState(prevState => {
+      const updatedGroceryItems = prevState.groceryItems.concat({ id: Math.floor(Math.random() * 100000), amount: 0, title: input })
+      return {
+        groceryItems: updatedGroceryItems
+      }
+    })
   }
 
   render() {
     return (
-      <div className="container">
-        <form onSubmit={this.addGrocery}>
-          <input
-            name="input-groceries"
-            placeholder="Test addGrocery"
-          />
-        </form>
+      <div className="container" >
         <GroceryList
           groceryItems={this.state.groceryItems}
           handleClick={this.handleClickGroceryItem}
